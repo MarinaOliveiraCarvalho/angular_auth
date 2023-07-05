@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthService } from './components/services/auth.service';
+import { AuthGuard } from './components/guards/auth.guard';
 
 
 
@@ -18,7 +20,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

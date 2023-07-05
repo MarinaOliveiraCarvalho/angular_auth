@@ -4,29 +4,43 @@ import { RouterModule, Routes } from '@angular/router';
 import { TabelaComponent } from './components/tabela/tabela.component';
 import { IndicadoresComponent } from './components/indicadores/indicadores.component';
 import { DefaultLayoutComponent } from './components/default/default-layout.component';
+import { AuthGuard } from './components/guards/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'DefaultLayoutComponent Page'
-    }
-  },
+		//whe app starting, it will navigate to login page
+		path:'', 
+    loadChildren: () => import('./components/login/login.module').then((m) => m.LoginModule),
+	},
+	{
+		path:'dashboard', 
+    loadChildren: () => import('./components/dashboard/dashboard.module').then((m) => m.DashboardModule),
+		canActivate:[AuthGuard]
+	},
   {
-    path: 'tabela',
+    path: 'todo',
     component: TabelaComponent,
     data: {
-      title: 'Tabela Page'
+      title: 'todo Page'
     }
   },
   {
-    path: 'indicadores',
+    path: 'taks',
     component: IndicadoresComponent,
     data: {
-      title: 'indicadores Page'
+      title: 'taks Page'
     }
   },
+
+
+  
+  // {
+  //   path: '',
+  //   component: DefaultLayoutComponent,
+  //   data: {
+  //     title: 'DefaultLayoutComponent Page'
+  //   }
+  // },
 ];
 
 @NgModule({
