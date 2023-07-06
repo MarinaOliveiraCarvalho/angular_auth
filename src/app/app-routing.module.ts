@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { TabelaComponent } from './components/tabela/tabela.component';
-import { IndicadoresComponent } from './components/indicadores/indicadores.component';
 import { AuthGuard } from './components/guards/auth.guard';
 
 const routes: Routes = [
@@ -17,17 +14,12 @@ const routes: Routes = [
 	},
   {
     path: 'todo',
-    component: TabelaComponent,
-    data: {
-      title: 'todo Page'
-    }
+    loadChildren: () => import('./components/todo/todo.module').then((m) => m.TodoModule),
+    canActivate:[AuthGuard]
   },
   {
-    path: 'taks',
-    component: IndicadoresComponent,
-    data: {
-      title: 'taks Page'
-    }
+    path: 'taks/:id',
+    loadChildren: () => import('./components/task/task.module').then((m) => m.TaskModule),
   },
 
 ];

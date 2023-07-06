@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export interface PeriodicElement {
@@ -26,18 +27,32 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   templateUrl: 'todo.component.html'
 })
-export class TodoComponent {
+export class TodoComponent implements OnInit {
 
-  constructor(private todoService: TodoService) { }
+  form: FormGroup | any;
+  private formSubmitAttempt: boolean | undefined;
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+
+  constructor(private todoService: TodoService, private fb: FormBuilder,) { }
+
+  ngOnInit() {
+    this.form = this.fb.group({
+      todoName: ['', Validators.required],
+    });
+  }
+
+  isFieldInvalid(field: string) {
+    return (
+      (!this.form.get(field).valid && this.form.get(field).touched) ||
+      (this.form.get(field).untouched && this.formSubmitAttempt)
+    );
+  }
 
 
   onSubmit(){
-    console.log(" onSubmit ------------------- ");
-
-    this.todoService.getTodoOfUser().subscribe({
+    console.log("creat new todo");
+    console.log(this.form.value.todoName)
+    this.todoService.createTodoOfUser(this.form.value.todoName).subscribe({
       next: (res) => res,
       error: (e) => e,
     })

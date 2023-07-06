@@ -1,25 +1,34 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Employee } from 'src/app/model/employee';
 import { PeriodicElement } from 'src/app/model/periodicElement';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+import { TodoService } from '../services/todo.service';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
-  templateUrl: 'tabela.component.html',
+  templateUrl: 'task.component.html',
 })
-export class TabelaComponent implements AfterViewInit {
+export class TaskComponent implements OnInit  {
   //dataSource: Element[] | undefined;
   // @ViewChild(MatPaginator)
-  // paginator!: MatPaginator;
-
+  // paginator!: MatPaginator; 
 
   //dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
   // displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  
+  constructor(
+    private router: Router,
+    private todoService: TodoService, 
+    private fb: FormBuilder) { }
 
-  ngAfterViewInit() {
+  ngOnInit() {
+    console.log("opa task");
     // this.dataSource.paginator = this.paginator;
     //this.dataSource = ELEMENT_DATA;
+
   }
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
