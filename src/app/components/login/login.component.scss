@@ -1,9 +1,20 @@
-.login-form{
-	margin-top: 50px;
-	margin-bottom: 50px;
-	margin-left: 200px;
-	margin-right: 200px;
-	padding: 100px;
-	height: 500px;
-	background-color: #f3f3f3;
-}
+p {
+	font-family: Roboto;
+  }
+
+  mat-card {
+	max-width: 400px;
+	margin: 2em auto;
+	text-align: center;
+  }
+  .signin-content {
+	padding: 60px 1rem;
+  }
+  .full-width-input {
+	width: 100%;
+  }
+
+  
+* {
+    box-sizing: border-box;
+  }

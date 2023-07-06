@@ -79,7 +79,7 @@ export class AuthService {
 
 				localStorage.removeItem('access_token');
 				localStorage.setItem('access_token', res.access_token);
-				return this.router.navigate(['home']);
+				return this.router.navigate(['dashboard']);
 			}),
 			catchError((e) => {
 				if (e.error.message) return throwError(() => e.error.message);
