@@ -18,6 +18,7 @@ import { TaskComponent } from './task.component';
 import { MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskRoutingModule } from './task-routing.module';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TaskRoutingModule } from './task-routing.module';
     ReactiveFormsModule, 
     CommonModule,
     TaskRoutingModule,
+    MatCheckboxModule,
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
   ],
   declarations: [ TaskComponent ]
