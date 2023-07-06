@@ -14,18 +14,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http'; 
 
-import { TaskComponent } from './task.component';
+import { TaskListComponent } from './task-list.component';
 import { MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TaskRoutingModule } from './task-routing.module';
+import { TaskListRoutingModule } from './task-routing.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-
-
-
-import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -33,12 +26,10 @@ import {MatSliderModule} from '@angular/material/slider';
     FormsModule,
     ReactiveFormsModule, 
     CommonModule,
-    TaskRoutingModule,
+    TaskListRoutingModule,
     MatCheckboxModule,
-    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
-    MatDatepickerModule,MatNativeDateModule,
-    MatSliderModule
+    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
   ],
-  declarations: [ TaskComponent ]
+  declarations: [ TaskListComponent ]
 })
-export class TaskModule { }
+export class TaskListModule { }

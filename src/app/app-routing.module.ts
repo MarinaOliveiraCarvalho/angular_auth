@@ -18,7 +18,11 @@ const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path: 'taks/:id',
+    path: 'taks/list/:id',
+    loadChildren: () => import('./components/task-list/task-list.module').then((m) => m.TaskListModule),
+  },
+  {
+    path: 'taks/creat/:id',
     loadChildren: () => import('./components/task/task.module').then((m) => m.TaskModule),
   },
 

@@ -14,6 +14,7 @@ export class TodoService {
 	private authorization: String = `/oauth/oauth/token`;
 	private link_get_todo: String = `/core/todo/page?direction=ASC&linesPerPage=12&orderBy=title&page=0`;
 	private link_create_todo: String = `/core/todo`;
+	private link_get_task: String = `/core/task/page/`;
 	private urlBase: String = `http://localhost:8765`;
 	
 	// todoList: TodoList;
@@ -88,6 +89,35 @@ export class TodoService {
 		);
 	}
  
+
+
+
+	public getTaskOfUser(id_todo: string): Observable<any> {
+		console.log("get task service");
+		//console.log(this.todoList);
+		let token = this.getAccessToken(); 
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_task}${id_todo}?linesPerPage=12&page=0`,{ headers }).pipe(
+			map((res) => {
+				console.log("resposta get add task of todo");
+				console.log(res);
+
+				return res;	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
 
 
 }
