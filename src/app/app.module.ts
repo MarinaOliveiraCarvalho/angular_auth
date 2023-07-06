@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './components/services/auth.service';
 import { AuthGuard } from './components/guards/auth.guard';
+import { TodoService } from './components/services/todo.service';
 
 
 @NgModule({
@@ -22,11 +23,11 @@ import { AuthGuard } from './components/guards/auth.guard';
     AppRoutingModule,
     // FormsModule,
     // ReactiveFormsModule,
-    // HttpClientModule,
+    HttpClientModule,
     BrowserAnimationsModule
     
   ],
-  providers: [ AuthService, AuthGuard],
+  providers: [ AuthService, AuthGuard, TodoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

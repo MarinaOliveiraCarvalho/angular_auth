@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 //import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
-import { DashboardComponent } from './dashboard.component';
-import { DashboardRoutingModule } from './dashboard-routing.module';
 import { CommonModule } from '@angular/common';
 
 
@@ -17,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
+import { TodoRoutingModule } from './todo-routing.module';
+import { TodoComponent } from './todo.component';
 
 
 @NgModule({
@@ -24,9 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule, 
     CommonModule,
-    DashboardRoutingModule,
+    TodoRoutingModule,
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
   ],
-  declarations: [ DashboardComponent ]
+  declarations: [ TodoComponent ]
 })
-export class DashboardModule {}
+export class TodoModule {}

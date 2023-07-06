@@ -24,11 +24,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 @Component({
-  templateUrl: 'dashboard.component.html'
+  templateUrl: 'todo.component.html'
 })
-export class DashboardComponent {
-
-
+export class TodoComponent {
 
   constructor(private todoService: TodoService) { }
 
@@ -44,5 +42,4 @@ export class DashboardComponent {
       error: (e) => e,
     })
   }
-
 }
