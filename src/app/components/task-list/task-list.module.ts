@@ -19,6 +19,7 @@ import { MatTableModule} from '@angular/material/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskListRoutingModule } from './task-routing.module';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CommonModule,
     TaskListRoutingModule,
     MatCheckboxModule,
-    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
+    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
+    MatPaginatorModule
   ],
   declarations: [ TaskListComponent ]
 })

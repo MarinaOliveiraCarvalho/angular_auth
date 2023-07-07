@@ -29,9 +29,7 @@ export class DashboardComponent implements OnInit {
   pgnation_page: number = 0; 
   pgnation_pageSize: number = 0;  
   pgnation_length: number = 12;  
-  pgnation_totalPages: number = 0;  
-
-
+  pgnation_totalPages: number = 0;
 
   ngOnInit() {
     let paginator = `?linesPerPage=${this.pgnation_length}&page=${this.pgnation_pageSize}`;

@@ -96,7 +96,7 @@ export class TodoService {
 
 
 
-	public getTaskOfUser(id_todo: string): Observable<any> {
+	public getTaskOfUser(id_todo: string, paginator: string): Observable<any> {
 		console.log("get task service");
 		//console.log(this.todoList);
 		let token = this.getAccessToken(); 
@@ -106,7 +106,7 @@ export class TodoService {
 			'Content-Type': "application/json",
 		};
 
-		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_task}${id_todo}?linesPerPage=12&page=0`,{ headers }).pipe(
+		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_task}${id_todo}${paginator}`,{ headers }).pipe(
 			map((res) => {
 				console.log("resposta get add task of todo");
 				console.log(res);

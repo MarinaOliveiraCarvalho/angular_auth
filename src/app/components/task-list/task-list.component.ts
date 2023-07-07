@@ -36,6 +36,10 @@ export class TaskListComponent implements OnInit  {
   dataSource = ELEMENT_DATA;
   selection = new SelectionModel<TodoElement>(true, []);
   todoId:any = null;
+  pgnation_page: number = 0; 
+  pgnation_pageSize: number = 0;  
+  pgnation_length: number = 12;  
+  pgnation_totalPages: number = 0;
   
   constructor(
     private router: Router,
@@ -51,29 +55,26 @@ export class TaskListComponent implements OnInit  {
     this.todoId = this.route.snapshot.params['id'];
     console.log(this.todoId);
 
-
-    this.todoService.getTaskOfUser(this.todoId).subscribe({
+    let paginator = `?linesPerPage=${this.pgnation_length}&page=${this.pgnation_pageSize}`;
+    this.todoService.getTaskOfUser(this.todoId, paginator).subscribe({
       next: (res) => {
         console.log("get task of todo");
-        console.log(res);
+
+
+        this.pgnation_page = res.number; 
+        this.pgnation_pageSize = res.number;  
+        this.pgnation_length = res.size;  
+        this.pgnation_totalPages = res.totalElements;  
 
         let todoList = []; 
         for (const element of res.content) {
-          console.log(element); 
-
-
           let mes = element.conclusion[1] < 10 ? '0'+element.conclusion[1] : element.conclusion[1];
           let dia = element.conclusion[2] < 10 ? '0'+element.conclusion[2] : element.conclusion[2];
           let hora = element.conclusion[3] < 10 ? '0'+element.conclusion[3] : element.conclusion[3];
           let min = element.conclusion[4] < 10 ? '0'+element.conclusion[4] : element.conclusion[4];
           
            let dateConclusion = new Date( `${element.conclusion[0]}-${mes}-${dia}T${hora}:${min}:00Z` );
-          // let dateNow = new Date();
-          // if(dateConclusion < dateNow){
-          //   console.log("olha essa ");
-          //   console.log(element);
-          //   console.log("olha essa ");
-          // };
+
 
 
           todoList.push({ 
@@ -216,5 +217,15 @@ export class TaskListComponent implements OnInit  {
   goBack(){
     this.router.navigate(['dashboard']);
   }
+
+  nextpageData(element:any){
+    console.log("nextpageData");
+    console.log(element);
+    this.pgnation_pageSize = element.pageIndex;  
+    this.pgnation_length = element.pageSize;  
+
+    this.ngOnInit();
+  }
+
 
 }
