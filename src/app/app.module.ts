@@ -13,6 +13,7 @@ import { AuthGuard } from './components/guards/auth.guard';
 import { TodoService } from './components/services/todo.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { TodoService } from './components/services/todo.service';
     // FormsModule,
     // ReactiveFormsModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    
     
   ],
   providers: [ AuthService, AuthGuard, TodoService],

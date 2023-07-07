@@ -52,16 +52,16 @@ export class TaskListComponent implements OnInit  {
 
     this.todoService.getTaskOfUser(this.todoId).subscribe({
       next: (res) => {
-        console.log("get todo ***********");
+        console.log("get task of todo");
         console.log(res);
 
         let todoList = []; 
         for (const element of res.content) {
           console.log(element); 
-          todoList.push({ position: todoList.length, name: element.title, item: element });
+          todoList.push({ select: element.status, position: todoList.length, name: element.name, item: element });
         }
 
-        // this.dataSource = todoList;
+        this.dataSource = todoList;
       },
       error: (e) => e,
     })
@@ -75,14 +75,14 @@ export class TaskListComponent implements OnInit  {
     // this.dataSource.paginator = this.paginator;
     //this.dataSource = ELEMENT_DATA;
     console.log(this.todoId);
-    return this.router.navigate(['taks/creat/'+this.todoId]);
+    return this.router.navigate(['task/creat/'+this.todoId]);
   }
 
 
-  goTodo(element: any){
-    console.log(element)
-    console.log(element.item.id)
-    this.router.navigate(['taks/'+element.item.id]);
+  goEditTask(element: any){
+    console.log(element);
+    console.log(element.item.id);
+    //this.router.navigate(['task/'+element.item.id]);
 
   }
 

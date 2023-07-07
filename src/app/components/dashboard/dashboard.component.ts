@@ -58,6 +58,6 @@ export class DashboardComponent implements OnInit {
   goTodo(element: any){
     console.log(element)
     console.log(element.item.id)
-    this.router.navigate(['taks/list/'+element.item.id]);
+    this.router.navigate(['task/list/'+element.item.id]);
   }
 }

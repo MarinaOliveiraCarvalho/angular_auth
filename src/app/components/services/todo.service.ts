@@ -14,6 +14,7 @@ export class TodoService {
 	private authorization: String = `/oauth/oauth/token`;
 	private link_get_todo: String = `/core/todo/page?direction=ASC&linesPerPage=12&orderBy=title&page=0`;
 	private link_create_todo: String = `/core/todo`;
+	private link_create_task: String = `/core/task`;
 	private link_get_task: String = `/core/task/page/`;
 	private urlBase: String = `http://localhost:8765`;
 	
@@ -108,6 +109,35 @@ export class TodoService {
 				console.log(res);
 
 				return res;	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+
+	public createTaskOfUser(payload : {name : string, conclusion: string, todoId: string }): Observable<any> {
+		console.log("post task create");
+		console.log(payload);
+		const body = payload;
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.post<any>(`${this.urlBase}${this.link_create_task}`, body, { headers }).pipe(
+			map((res) => {
+				console.log("res creat get toto");
+				console.log(res);
+
+				return this.router.navigate(['task/list/'+payload.todoId]);	
 			}),
 			catchError((e) => {
 				if (e.error.message) return throwError(() => e.error.message);

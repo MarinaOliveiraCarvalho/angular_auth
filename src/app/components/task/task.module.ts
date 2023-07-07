@@ -27,6 +27,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 import {MatSliderModule} from '@angular/material/slider';
 
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';  
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import {MatSliderModule} from '@angular/material/slider';
     MatCheckboxModule,
     MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
     MatDatepickerModule,MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    NgxMatTimepickerModule
   ],
   declarations: [ TaskComponent ]
 })
