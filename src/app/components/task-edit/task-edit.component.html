@@ -36,7 +36,18 @@
 
                 
 
-                <br /><button mat-raised-button color="primary" type="submit">Save</button>
+                <br />
+                <section>
+                    <div class="example-button-row">
+                      <div class="demo-button-container" style="text-align: left;">
+            
+                        <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+                          back page
+                        </button>
+                        <button mat-raised-button color="primary" type="submit">Save</button>
+                      </div>
+                    </div>
+                  </section>
                 </form>
 		</mat-card-content>
 	</mat-card>

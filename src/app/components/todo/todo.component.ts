@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ export class TodoComponent implements OnInit {
   private formSubmitAttempt: boolean | undefined;
 
 
-  constructor(private todoService: TodoService, private fb: FormBuilder,) { }
+  constructor(private router: Router,private todoService: TodoService, private fb: FormBuilder,) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -35,5 +36,9 @@ export class TodoComponent implements OnInit {
       next: (res) => res,
       error: (e) => e,
     })
+  }
+
+  goBack(){
+    this.router.navigate(['dashboard']);
   }
 }

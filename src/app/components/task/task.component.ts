@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: 'task.component.html',
@@ -17,6 +17,7 @@ export class TaskComponent implements OnInit  {
 
 
   constructor(
+    private router: Router,
     private todoService: TodoService, 
     private fb: FormBuilder,
     private route: ActivatedRoute ) { }
@@ -57,5 +58,9 @@ export class TaskComponent implements OnInit  {
       next: (res) => res,
       error: (e) => e,
     })
+  }
+
+  goBack(){
+    this.router.navigate(['task/list/'+this.todoId])
   }
 }
