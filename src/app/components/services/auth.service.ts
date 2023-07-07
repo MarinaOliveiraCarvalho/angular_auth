@@ -9,14 +9,10 @@ import { BehaviorSubject } from 'rxjs';
 export class AuthService {
 
 	private authorization: String = `/oauth/oauth/token`;
+	private link_creat_login: String = `/core/login`;
 	private urlBase: String = `http://localhost:8765`;
 
 	constructor(private http: HttpClient, private router: Router) {
-		// if (this.hasToken()) {
-		// 	this.setLoggedIn(true);
-		// } else {
-		// 	this.setLoggedIn(false);
-		// }
 	}
 
 	public sign(payload: { email: string; password: string }): Observable<any> {
@@ -64,23 +60,31 @@ export class AuthService {
 		return !jwtHelper.isTokenExpired(token);
 	}
 
+	
+	public createNewUserLongin(payload : {email : string, name: string, password: string }): Observable<any> {
+		console.log("start creat login of user");
+		console.log(payload);
+		const body = payload; 
 
-	// loggenIn$ = new BehaviorSubject(false);
+		const headers = {
+			'Content-Type': "application/json",
+		};
 
-	// hasToken(): boolean {
-	// 	//chack user has a token
-	// 	if (localStorage.getItem('token')) {
-	// 		return true;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// }
+		return this.http.post<any>(`${this.urlBase}${this.link_creat_login}`, body, { headers }).pipe(
+			map((res) => {
+				console.log("res creat login of user");
+				console.log(res);
 
-	// setLoggedIn(value: boolean) {
-	// 	//update loggedin status in loggedIn$ stream. 
-	// 	this.loggenIn$.next(value);
-	// }
-
-
+				return this.router.navigate(['']);	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
 
 }

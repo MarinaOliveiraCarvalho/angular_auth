@@ -14,6 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarModule,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+
 
 @NgModule({
   imports: [
@@ -23,7 +31,10 @@ import { MatCardModule } from '@angular/material/card';
     // BrowserModule,
     CommonModule,
     //HttpClientModule, 
-    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
+    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
+    MatSelectModule,
+    MatSnackBarModule,
+    
   ],
   declarations: [NewUserComponent]
 })

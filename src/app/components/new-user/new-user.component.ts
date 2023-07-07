@@ -5,6 +5,7 @@ import { NgIf } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AuthService } from '../services/auth.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,8 @@ export class NewUserComponent implements OnInit {
 
   form: FormGroup | any;
   private formSubmitAttempt: boolean | undefined;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   loading = false;
   submitted = false;
@@ -23,15 +26,16 @@ export class NewUserComponent implements OnInit {
 
   constructor(private router: Router,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.form = this.fb.group({
       userName: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
     });
-
   }
 
   loginUser() {
@@ -45,19 +49,24 @@ export class NewUserComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log("iniciando login enciando valores")
-    console.log(this.form.value.password)
-    console.log(this.form.value.userName)
+    console.log("criando usuario");
+    console.log(this.form.value.userName);
+    console.log(this.form.value.password);
+    console.log(this.form.value.passwordConfirm);
 
-    this.authService.sign({
+    if(this.form.value.password != this.form.value.passwordConfirm){
+      this.openSnackBar();
+      return;
+    }
+
+    this.authService.createNewUserLongin({
       email: this.form.value.userName,
+      name : this.form.value.userName,
       password: this.form.value.password
     }).subscribe({
       next: (res) => res,
       error: (e) => e,
     })
-
-
   }
 
   isFieldInvalid(field: string) {
@@ -67,11 +76,15 @@ export class NewUserComponent implements OnInit {
     );
   }
 
-
-
-
   creatNewUser(){
     
+  }
+
+  openSnackBar() {
+    this._snackBar.open('the passwords are different!!', 'Ok', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+    });
   }
 
 }

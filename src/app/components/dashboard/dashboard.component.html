@@ -42,12 +42,20 @@
 
                   <br />
 
-                  <div class="demo-button-container" style="text-align: left;">
-                    <button mat-raised-button color="primary" (click)="onSubmit()" class="demo-button">
-                        Add Todo
-                    </button>
-                  </div>
-				
+
+                  <section>
+                    <div class="example-button-row">
+                      <div class="demo-button-container" style="text-align: left;">
+                        <button mat-raised-button color="primary" (click)="onSubmit()" class="demo-button" style="margin-right:20px">
+                          Add Todo
+                      </button>
+            
+                        <button mat-raised-button color="primary" (click)="goBack()" class="demo-button" style="margin-right:20px">
+                          Exit of system
+                        </button>
+                      </div>
+                    </div>
+                  </section>
 				
 			<!-- </form> -->
 		</mat-card-content>

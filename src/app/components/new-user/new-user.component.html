@@ -14,13 +14,13 @@
 				</mat-form-field><br />
 				<mat-form-field class="full-width-input">
 					<input matInput type="password" placeholder="Password" formControlName="password" required>
-					<mat-error *ngIf="isFieldInvalid('userName')">
+					<mat-error *ngIf="isFieldInvalid('password')">
 						Please inform your password
 					</mat-error>
 				</mat-form-field><br />
 				<mat-form-field class="full-width-input">
-					<input matInput type="password" placeholder="Password" formControlName="password" required>
-					<mat-error *ngIf="isFieldInvalid('userName')">
+					<input matInput type="password" placeholder="Password confirm" formControlName="passwordConfirm" required>
+					<mat-error *ngIf="isFieldInvalid('passwordConfirm')">
 						Please inform your password
 					</mat-error>
 				</mat-form-field><br />

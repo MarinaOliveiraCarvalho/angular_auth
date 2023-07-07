@@ -60,4 +60,10 @@ export class DashboardComponent implements OnInit {
     console.log(element.item.id)
     this.router.navigate(['task/list/'+element.item.id]);
   }
+
+  goBack(){
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('token');
+    this.router.navigate(['']);
+  }
 }
