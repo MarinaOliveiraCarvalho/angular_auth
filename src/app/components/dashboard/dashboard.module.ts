@@ -18,6 +18,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule } from '@angular/common/http';
 
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule, 
     CommonModule,
     DashboardRoutingModule,
-    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule
+    MatToolbarModule,MatCardModule,MatButtonModule,MatTableModule,MatFormFieldModule,MatInputModule,
+    MatPaginatorModule,
   ],
   declarations: [ DashboardComponent ]
 })

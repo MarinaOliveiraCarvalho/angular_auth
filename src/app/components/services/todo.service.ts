@@ -12,7 +12,7 @@ import { TodoList } from 'src/app/model/todoList';
 export class TodoService {
 
 	private authorization: String = `/oauth/oauth/token`;
-	private link_get_todo: String = `/core/todo/page?direction=ASC&linesPerPage=12&orderBy=title&page=0`;
+	private link_get_todo: String = `/core/todo/page`;
 	private link_create_todo: String = `/core/todo`;
 	private link_create_task: String = `/core/task`;
 	private link_conclusion_task: String = `/core/task/conclusion`;
@@ -25,8 +25,9 @@ export class TodoService {
 	constructor(private http: HttpClient, private router: Router) {
 	}
 
-	public getTodoOfUser(): Observable<any> {
+	public getTodoOfUser(paginator: string): Observable<any> {
 		console.log("get todo service");
+		console.log(paginator);
 		//console.log(this.todoList);
 		let token = this.getAccessToken();
 
@@ -35,7 +36,7 @@ export class TodoService {
 			'Content-Type': "application/json",
 		};
 
-		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_todo}`,{ headers }).pipe(
+		return this.http.get<TodoList>(`${this.urlBase}${this.link_get_todo}${paginator}`,{ headers }).pipe(
 			map((res) => {
 				console.log("resposta get toto");
 				console.log(res);
