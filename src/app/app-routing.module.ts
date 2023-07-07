@@ -25,6 +25,10 @@ const routes: Routes = [
     path: 'task/creat/:id',
     loadChildren: () => import('./components/task/task.module').then((m) => m.TaskModule),
   },
+  {
+    path: 'task/edit/:id/:todo_id',
+    loadChildren: () => import('./components/task-edit/task-edit.module').then((m) => m.TaskEditModule),
+  },
 
 ];
 

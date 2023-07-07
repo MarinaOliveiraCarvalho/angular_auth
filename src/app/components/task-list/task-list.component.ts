@@ -62,6 +62,9 @@ export class TaskListComponent implements OnInit  {
         }
 
         this.dataSource = todoList;
+
+        console.log(this.dataSource);
+
       },
       error: (e) => e,
     })
@@ -80,9 +83,10 @@ export class TaskListComponent implements OnInit  {
 
 
   goEditTask(element: any){
+    console.log("goEditTask");
     console.log(element);
     console.log(element.item.id);
-    //this.router.navigate(['task/'+element.item.id]);
+    this.router.navigate(['task/edit/'+element.item.id+'/'+this.todoId]);
 
   }
 
@@ -108,6 +112,49 @@ export class TaskListComponent implements OnInit  {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  checkClicEventAll(){
+    console.log("checkClicEventAll");
+    console.log(this.isAllSelected());
+    console.log("--------------------------------");
+ 
+    for (const element of this.dataSource) {
+      console.log(element.item); 
+      console.log(element.item.status); 
+      if(element.item.status == !this.isAllSelected()){
+        this.setConclusionTaskLoop(element.item.id, this.todoId);  
+      }
+    }
+
+    return this.router.navigate(['task/list/'+this.todoId]);	
+
+  }
+
+  checkClicEvent(event:any){
+    console.log("checkClicEvent");
+    console.log(event);
+    console.log("---------------------------------");
+    console.log(event.item);
+
+    this.setConclusionTask(event.item.id, this.todoId);
+
+  }
+
+  setConclusionTask(id: string, todoId:string){
+    let name = "name";
+    this.todoService.setConclusionTask({ id, todoId, name }).subscribe({
+      next: (res) => res,
+      error: (e) => e,
+    })
+  }
+
+  setConclusionTaskLoop(id: string, todoId:string){
+    let name = "name";
+    this.todoService.setConclusionTaskLoop({ id, todoId, name }).subscribe({
+      next: (res) => res,
+      error: (e) => e,
+    })
   }
 
 }

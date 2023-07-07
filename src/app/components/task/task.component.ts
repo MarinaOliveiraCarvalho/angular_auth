@@ -23,6 +23,7 @@ export class TaskComponent implements OnInit  {
 
   ngOnInit() {
     console.log("on create taks");
+    console.log(this.route.snapshot);
     this.todoId = this.route.snapshot.params['id'];
     this.form = this.fb.group({
       taskName: ['', Validators.required],

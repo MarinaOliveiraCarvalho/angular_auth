@@ -15,7 +15,9 @@ export class TodoService {
 	private link_get_todo: String = `/core/todo/page?direction=ASC&linesPerPage=12&orderBy=title&page=0`;
 	private link_create_todo: String = `/core/todo`;
 	private link_create_task: String = `/core/task`;
+	private link_conclusion_task: String = `/core/task/conclusion`;
 	private link_get_task: String = `/core/task/page/`;
+	private link_get_one_task: String = `/core/task/`;
 	private urlBase: String = `http://localhost:8765`;
 	
 	// todoList: TodoList;
@@ -120,6 +122,32 @@ export class TodoService {
 		);
 	}
 
+	public getOneTask(taskId: string): Observable<any> {
+		console.log("get task service");
+		let token = this.getAccessToken(); 
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.get<any>(`${this.urlBase}${this.link_get_one_task}${taskId}`,{ headers }).pipe(
+			map((res) => {
+				console.log("resposta get add task");
+				console.log(res);
+
+				return res;	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
 
 	public createTaskOfUser(payload : {name : string, conclusion: string, todoId: string }): Observable<any> {
 		console.log("post task create");
@@ -149,5 +177,89 @@ export class TodoService {
 		);
 	}
 
+	public editTaskOfUser(payload : {id: string, name : string, conclusion: string, todoId: string }): Observable<any> {
+		console.log("post task create");
+		console.log(payload);
+		const body = payload;
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.put<any>(`${this.urlBase}${this.link_create_task}`, body, { headers }).pipe(
+			map((res) => {
+				console.log("res edit task");
+				console.log(res);
+
+				return this.router.navigate(['task/list/'+payload.todoId]);	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+	public setConclusionTask(payload : {id : string, todoId: string, name: string }): Observable<any> {
+		console.log("post task conclusion");
+		console.log(payload);
+		const body = payload;
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.post<any>(`${this.urlBase}${this.link_conclusion_task}`, body, { headers }).pipe(
+			map((res) => {
+				console.log("res creat get toto");
+				console.log(res);
+
+				return this.router.navigate(['task/list/'+payload.todoId]);	
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
+
+
+	public setConclusionTaskLoop(payload : {id : string, todoId: string, name: string }): Observable<any> {
+		console.log("post task conclusion");
+		console.log(payload);
+		const body = payload;
+		let token = this.getAccessToken();
+
+		const headers = {
+			'Authorization': "Bearer "+ token,
+			'Content-Type': "application/json",
+		};
+
+		return this.http.post<any>(`${this.urlBase}${this.link_conclusion_task}`, body, { headers }).pipe(
+			map((res) => {
+				console.log("res creat get toto");
+				console.log(res);
+
+				return true;
+			}),
+			catchError((e) => {
+				if (e.error.message) return throwError(() => e.error.message);
+				return throwError(
+					() =>
+						'No momento não estamos conseguindo validar este dados, tente novamente mais tarde!'
+				);
+			})
+		);
+	}
 
 }
