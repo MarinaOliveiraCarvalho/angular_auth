@@ -193,7 +193,7 @@ export class TodoService {
 				console.log("res edit task");
 				console.log(res);
 
-				return this.router.navigate(['task/list/'+payload.todoId]);	
+				// return this.router.navigate(['task/list/'+payload.todoId]);	
 			}),
 			catchError((e) => {
 				if (e.error.message) return throwError(() => e.error.message);

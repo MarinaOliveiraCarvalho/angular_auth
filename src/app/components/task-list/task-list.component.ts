@@ -15,11 +15,13 @@ export interface TodoElement {
   position: number;
   item: any;
   select: boolean;
+  conclusion: String;
+  dueInfo: String;
 }
 
 const ELEMENT_DATA: TodoElement[] = [
-  { name: "asdasd", item: "", position:  1, select: false },
-  { name: "asdasd", item: "", position:  1, select: false }
+  { name: "asdasd", item: "", position:  1, select: false,  conclusion: new Date().toISOString(),  dueInfo: 'vencido'},
+  { name: "asdasd", item: "", position:  1, select: false,  conclusion: new Date().toISOString(),  dueInfo: 'vencido'}
 ];
 
 @Component({
@@ -30,7 +32,7 @@ export class TaskListComponent implements OnInit  {
   // @ViewChild(MatPaginator)
   // paginator!: MatPaginator; 
 
-  displayedColumns: string[] = ['select', 'position', 'name'];
+  displayedColumns: string[] = ['select', 'position', 'name', 'conclusion', 'dueInfo'];
   dataSource = ELEMENT_DATA;
   selection = new SelectionModel<TodoElement>(true, []);
   todoId:any = null;
@@ -58,7 +60,30 @@ export class TaskListComponent implements OnInit  {
         let todoList = []; 
         for (const element of res.content) {
           console.log(element); 
-          todoList.push({ select: element.status, position: todoList.length, name: element.name, item: element });
+
+
+          let mes = element.conclusion[1] < 10 ? '0'+element.conclusion[1] : element.conclusion[1];
+          let dia = element.conclusion[2] < 10 ? '0'+element.conclusion[2] : element.conclusion[2];
+          let hora = element.conclusion[3] < 10 ? '0'+element.conclusion[3] : element.conclusion[3];
+          let min = element.conclusion[4] < 10 ? '0'+element.conclusion[4] : element.conclusion[4];
+          
+           let dateConclusion = new Date( `${element.conclusion[0]}-${mes}-${dia}T${hora}:${min}:00Z` );
+          // let dateNow = new Date();
+          // if(dateConclusion < dateNow){
+          //   console.log("olha essa ");
+          //   console.log(element);
+          //   console.log("olha essa ");
+          // };
+
+
+          todoList.push({ 
+            select: element.status, 
+            position: todoList.length, 
+            name: element.name, 
+            item: element,
+            conclusion: this.formatDate(dateConclusion),
+            dueInfo: this.checkDue(dateConclusion)
+          });
         }
 
         this.dataSource = todoList;
@@ -69,6 +94,37 @@ export class TaskListComponent implements OnInit  {
       error: (e) => e,
     })
 
+  }
+
+  formatDate(today:Date){ 
+    var day = today.getDate() + "";
+    var month = (today.getMonth() + 1) + "";
+    var year = today.getFullYear() + "";
+    var hour = today.getHours() + "";
+    var minutes = today.getMinutes() + "";
+    var seconds = today.getSeconds() + "";
+
+    day = this.checkZero(day);
+    month = this.checkZero(month);
+    year = this.checkZero(year);
+    hour = this.checkZero(hour);
+    minutes = this.checkZero(minutes);
+    seconds = this.checkZero(seconds);
+
+    console.log(day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds);
+    return day + "/" + month + "/" + year + " " + hour + ":" + minutes + ":" + seconds;
+  }
+  
+  checkZero(data:string){
+    if(data.length == 1){
+      data = "0" + data;
+    }
+    return data;
+  }
+
+  checkDue(date:Date){
+    let dateToDay = new Date();
+    return date < dateToDay ? 'due' : 'to do'
   }
 
   

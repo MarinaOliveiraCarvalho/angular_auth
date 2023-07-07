@@ -8,10 +8,10 @@ import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  templateUrl: './new-user.component.html',
+  styleUrls: ['./new-user.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class NewUserComponent implements OnInit {
 
   form: FormGroup | any;
   private formSubmitAttempt: boolean | undefined;
@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
 
 
   creatNewUser(){
-    this.router.navigate(['new/user']);
+    
   }
 
 }
